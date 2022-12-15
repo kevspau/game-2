@@ -1,0 +1,19 @@
+app:
+    package: mycompany.game-2
+    name: game-2
+    displayName: game-2
+    author: My Company
+    version: '1.0'
+
+    plugins:
+        #- arcade
+        #- nape
+        #- ui
+        #- elements
+
+    libs:
+        #- somelib
+
+    defines:
+        #- somedefine
+

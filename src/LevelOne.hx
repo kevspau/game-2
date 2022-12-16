@@ -11,11 +11,14 @@ using ceramic.VisualTransition;
 
 class LevelOne extends Scene {
     var plr: Player;
+    var block: Visual;
     var hint = new Text();
     var caption = new Text();
+    
     override function create() {
+        app.arcade.world.gravityY = -90;
         //begin block and children definition//
-        var block = new Visual();
+        block = new Visual();
         block.depth = 0; //lets player be shown in front
         block.pos(width/2, height/2);
         add(block);
@@ -24,6 +27,9 @@ class LevelOne extends Scene {
         q.size(200, 200);
         q.color = Color.WHITE;
         q.anchor(0.5, 0.5);
+        q.initArcadePhysics();
+        q.body.immovable = true;
+        q.body.allowGravity = false;
         block.add(q);
 
         var txt = new Text();
@@ -79,6 +85,8 @@ class LevelOne extends Scene {
         hint.color = Color.YELLOW;
         hint.anchor(0, 0.5);
         hint.pos(width/2 + 3, height - 35);
+
+        app.arcade.onUpdate(this, updatePhysics);
     }
     override function update(delta: Float) {
         if (plr.dragged) {
@@ -87,5 +95,8 @@ class LevelOne extends Scene {
             caption.anchor(0.5, 0.5);
             caption.color = Color.LIGHTPINK;
         }
+    }
+    function updatePhysics(d: Float) {
+        plr.updatePhysics([block]); //!get collisions working
     }
 }

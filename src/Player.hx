@@ -12,6 +12,8 @@ class Player extends Quad {
     public var dragged = false;
     public function new() {
         super();
+        initArcadePhysics();
+        body.collideWorldBounds = true;
         size(25, 25);
         anchor(0.5, 0.5);
         color = Color.RED;
@@ -36,5 +38,10 @@ class Player extends Quad {
     }
     function changePos(info: TouchInfo) {
         this.pos(sqx + screen.pointerX - spx, sqy + screen.pointerY - spy);
+    }
+    public function updatePhysics(a:Array<arcade.Collidable>) {
+        for (v in a) {
+            app.arcade.world.collide(this, v);
+        }
     }
 }

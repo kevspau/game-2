@@ -9,7 +9,7 @@ class Player extends Quad {
     var spy: Float;
     var sqx: Float;
     var sqy: Float;
-    public var dragged = false;
+    @event function dragged();
     public function new() {
         super();
         initArcadePhysics();
@@ -20,7 +20,6 @@ class Player extends Quad {
         this.onPointerDown(app.scenes.main, onDrag);
     }
     function onDrag(info:TouchInfo) {
-        this.dragged = true;
         this.transition(QUAD_EASE_IN, 0.15, (cb) -> {
             cb.size(40, 40);
         });
